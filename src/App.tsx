@@ -1,13 +1,18 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Formik, useField } from "formik";
 import { Button, Form } from "react-bootstrap";
 
-const FKText = () => {
-  const [field] = useField({ name: "email" });
-  return <Form.Control {...field}></Form.Control>;
+const formikify = (Component: React.FunctionComponent) => {
+  const FormikWrapper = (props: any) => {
+    const [field] = useField({ name: "email" });
+    return <Component {...field} {...props}></Component>;
+  };
+  return FormikWrapper;
 };
+
+const UIText = (props: any) => <Form.Control {...props} />;
+const FKText = formikify(UIText);
 
 function App() {
   return (
@@ -24,7 +29,7 @@ function App() {
             <Form.Group>
               <FKText></FKText>
             </Form.Group>
-            <Button type="submit">Fukc</Button>
+            <Button type="submit">Submit</Button>
           </Form>
         )}
       </Formik>
