@@ -23,6 +23,9 @@ const formikify = <P extends object>(
   return FormikWrapper;
 };
 
+/**
+ * Presentational component for input layout/context
+ */
 const UIGroup: FC<{ label: string; error: string }> = ({ label, error, children: input }) => {
   return (
     <Form.Group>
